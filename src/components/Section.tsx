@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import {Fade} from 'react-awesome-reveal'
 
 interface SectionProps {
     title: String
@@ -11,21 +12,25 @@ interface SectionProps {
 
 export const Section = ({title, backgroundImg, description, leftBtnText, rightBtnText}: SectionProps) => {
     return (
-        <Wrap bgImage = {backgroundImg}>
-            <ItemText>
-                <h1>{title}</h1>
-                <p>{description}</p>
-            </ItemText>
+        <Wrap bgImage={backgroundImg}>
+            <Fade direction={"down"} triggerOnce>
+                <ItemText>
+                    <h1>{title}</h1>
+                    <p>{description}</p>
+                </ItemText>
+            </Fade>
             <Buttons>
-                <ButtonGroup>
-                    <LeftButton>{leftBtnText}</LeftButton>
-                    {rightBtnText &&
-                    <>
-                        <RightButton>{rightBtnText}</RightButton>
-                    </>
-                    }
-                </ButtonGroup>
-                <DownArrow src = {"/images/down-arrow.svg"}/>
+                <Fade direction={"down"} triggerOnce>
+                    <ButtonGroup>
+                        <LeftButton>{leftBtnText}</LeftButton>
+                        {rightBtnText &&
+                        <>
+                            <RightButton>{rightBtnText}</RightButton>
+                        </>
+                        }
+                    </ButtonGroup>
+                </Fade>
+                <DownArrow src={"/images/down-arrow.svg"}/>
 
             </Buttons>
         </Wrap>
@@ -38,7 +43,7 @@ interface WrapProps {
     bgImage: any
 }
 
-const Wrap= styled.div<WrapProps>`
+const Wrap = styled.div<WrapProps>`
   width: 100vw;
   height: 100vh;
   //background-image: url("/images/model-s.jpg");
@@ -55,12 +60,13 @@ const Wrap= styled.div<WrapProps>`
 const ItemText = styled.div`
   padding-top: 15vh;
   text-align: center;
+  z-index: -1;
 `
 
 const ButtonGroup = styled.div`
   display: flex;
   margin-bottom: 30px;
-  @media (max-width: 768px){
+  @media (max-width: 768px) {
     flex-direction: column;
   }
 
