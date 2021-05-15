@@ -7,7 +7,7 @@ import {useSelector} from "react-redux";
 import {selectMenu} from "../features/car/menuSlice";
 
 interface BurgerStatusProps {
-    show: any
+    show: Boolean
 }
 
 export const Header = () => {
