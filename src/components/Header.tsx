@@ -4,6 +4,7 @@ import MenuIcon from '@material-ui/icons/Menu';
 import CloseIcon from '@material-ui/icons/Close';
 import {selectCars} from "../features/car/carSlice";
 import {useSelector} from "react-redux";
+import {selectMenu} from "../features/car/menuSlice";
 
 interface BurgerStatusProps {
     show: any
@@ -12,6 +13,7 @@ interface BurgerStatusProps {
 export const Header = () => {
     const [burgerStatus, setBurgerStatus] = useState<Boolean>(false)
     const cars = useSelector(selectCars)
+    const menuItems = useSelector(selectMenu)
 
     return (
         <Container>
@@ -30,13 +32,7 @@ export const Header = () => {
                 <CloseWrapper>
                     <CustomClose onClick={() => setBurgerStatus(false)}/>
                 </CloseWrapper>
-                {cars.map((car: string, index: number) => <li><a key={index} href="#">{car}</a></li>
-                )}
-                <li><a href="#">Existing Inventory</a></li>
-                <li><a href="#">Used Inventory</a></li>
-                <li><a href="#">Trade-in</a></li>
-                <li><a href="#">Cybertruck</a></li>
-                <li><a href="#">Roadaster</a></li>
+                {menuItems.map((menu: string, index: number) => <li key={index}><a href="#">{menu}</a></li>)}
             </BurgerNavMenu>
         </Container>
     )
@@ -105,6 +101,7 @@ const BurgerNavMenu = styled.div<BurgerStatusProps>`
   text-align: start;
   transform: ${props => props.show ? 'translateX(0)' : 'translateX(100%)'};
   transition: transform 0.2s ease-in-out;
+  overflow-y: scroll;
 
   li {
     padding: 15px 0;
